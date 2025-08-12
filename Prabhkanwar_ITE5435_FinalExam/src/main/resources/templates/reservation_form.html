@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/style.css}">
+  <meta charset="UTF-8"/>
+  <title>Husky Air – Reservation</title>
+</head>
+<body>
+<h2>Fill your Details</h2>
+
+<div th:if="${error}" style="color:red" th:text="${error}"></div>
+
+<form th:action="${editing} ? @{/reservations/{id}/update(id=${reservationId})} : @{/reservations}"
+      th:object="${req}" method="post">
+
+  <label>First Name</label>
+  <input type="text" th:field="*{firstName}"/>
+  <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red"></span><br/>
+
+  <label>Last Name</label>
+  <input type="text" th:field="*{lastName}"/>
+  <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color:red"></span><br/>
+
+  <label>No. of Passengers</label>
+  <input type="number" min="1" max="10" th:field="*{passengers}"/>
+  <span th:if="${#fields.hasErrors('passengers')}" th:errors="*{passengers}" style="color:red"></span><br/>
+
+  <label>Select Your Class</label>
+  <select th:field="*{travelClass}">
+    <option th:value="'ECONOMY'">Economy</option>
+    <option th:value="'BUSINESS'">Business</option>
+    <option th:value="'FIRST'">First</option>
+  </select>
+  <span th:if="${#fields.hasErrors('travelClass')}" th:errors="*{travelClass}" style="color:red"></span><br/>
+
+  <label>Phone Number</label>
+  <input type="text" th:field="*{phone}" placeholder="10 digits"/>
+  <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" style="color:red"></span><br/>
+
+  <label>Time</label>
+  <input type="time" th:field="*{time}"/>
+  <span th:if="${#fields.hasErrors('time')}" th:errors="*{time}" style="color:red"></span><br/>
+
+  <label>Date of Departing</label>
+  <input type="date" th:field="*{dateOfDeparting}"/>
+  <span th:if="${#fields.hasErrors('dateOfDeparting')}" th:errors="*{dateOfDeparting}" style="color:red"></span><br/>
+
+  <label>Payment Method</label>
+  <select th:field="*{paymentMethod}">
+    <option th:value="'CARD'">Card</option>
+    <option th:value="'CASH'">Cash</option>
+  </select>
+  <span th:if="${#fields.hasErrors('paymentMethod')}" th:errors="*{paymentMethod}" style="color:red"></span><br/>
+
+  <button type="submit" th:text="${editing} ? 'Update' : 'Next'">Next</button>
+</form>
+
+<p><a th:href="@{/reservations}">View All Reservations</a></p>
+</body>
+</html>

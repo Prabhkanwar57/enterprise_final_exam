@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/style.css}">
+<meta charset="UTF-8"/><title>Reservation Success</title></head>
+<body>
+  <h2>Reservation Saved!</h2>
+  <p th:text="'Reservation ID: ' + ${reservation.id}"></p>
+  <p th:text="'Passenger: ' + ${reservation.firstName} + ' ' + ${reservation.lastName}"></p>
+  <p th:text="'Class: ' + ${reservation.travelClass}"></p>
+  <p th:text="'Passengers: ' + ${reservation.passengers}"></p>
+  <p th:text="'Total Amount: $' + ${reservation.totalAmount}"></p>
+
+  <h4>JSON sent (via Jackson)</h4>
+  <pre th:text="${json}"></pre>
+
+  <p><a th:href="@{/reservations/new}">Create another</a> | <a th:href="@{/reservations}">All reservations</a></p>
+</body>
+</html>

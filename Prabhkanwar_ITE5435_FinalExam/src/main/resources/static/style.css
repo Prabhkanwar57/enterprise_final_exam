@@ -1,0 +1,276 @@
+/* ---------- Theme ---------- */
+:root{
+  --bg: #0b1220;
+  --bg-grad-1: #0b1220;
+  --bg-grad-2: #101a33;
+  --card: #121a2c;
+  --card-2: #0f1627;
+  --text: #e8edf7;
+  --muted: #a9b2c7;
+  --border: #1e2a49;
+
+  --primary: #6366f1;
+  --primary-2: #8b5cf6;
+  --accent: #22d3ee;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body{
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+               Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 80% -20%, rgba(139,92,246,.16), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(34,211,238,.12), transparent 60%),
+    linear-gradient(180deg, var(--bg-grad-1), var(--bg-grad-2));
+  padding: 48px 20px 80px;
+  display: grid;
+  place-items: start center;
+  gap: 32px;
+}
+
+h1,h2,h3{
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+h2{
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 800;
+  letter-spacing: .2px;
+  background: linear-gradient(90deg, #fff, #c7d2fe 45%, #e9d5ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+a{
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+a:hover{ text-decoration: underline; }
+
+/* ---------- Forms ---------- */
+/* Scope the big, card-style form ONLY to the top page form */
+body > form{
+  width: min(100%, 980px);
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)), var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 12px 18px;
+  padding: 26px;
+}
+body > form br{ display: none; }
+
+body > form > label{
+  align-self: center;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"],
+input[type="time"],
+input[type="date"],
+select,
+button{
+  font: inherit;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 12px 14px;
+  background: var(--card-2);
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .05s ease;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="time"],
+input[type="date"],
+select{
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+input:focus,
+select:focus{
+  border-color: color-mix(in oklab, var(--primary) 70%, white 0%);
+  box-shadow:
+    0 0 0 3px color-mix(in oklab, var(--primary) 30%, transparent 70%),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+body > form > span{
+  grid-column: 2 / 3;
+  font-size: .86rem;
+  color: var(--danger) !important;
+  margin-top: -6px;
+}
+
+body > form > button{
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+/* Buttons */
+button{
+  background: linear-gradient(180deg,
+              color-mix(in oklab, var(--primary) 92%, #fff 0%),
+              color-mix(in oklab, var(--primary-2) 88%, #000 0%));
+  border: 1px solid color-mix(in oklab, var(--primary) 70%, black 30%);
+  color: white;
+  font-weight: 700;
+  letter-spacing: .2px;
+  cursor: pointer;
+  padding-inline: 18px;
+}
+button:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--primary) 35%, transparent 65%);
+}
+button:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Delete buttons (by action URL) */
+form[action$="/delete"] button,
+form[action*="/delete"] button{
+  background: linear-gradient(180deg,
+              color-mix(in oklab, var(--danger) 92%, #fff 0%),
+              color-mix(in oklab, var(--danger) 80%, #000 0%));
+  border-color: color-mix(in oklab, var(--danger) 70%, black 30%);
+}
+form[action$="/delete"] button:hover,
+form[action*="/delete"] button:hover{
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--danger) 35%, transparent 65%);
+}
+
+/* ---------- Table ---------- */
+table{
+  width: min(100%, 980px);
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)), var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+/* Header */
+thead th{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.00));
+  color: #cdd5ea;
+  text-align: left;
+  font-size: .9rem;
+  letter-spacing: .3px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Cells */
+tbody td{
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(30,42,73,.6);
+  font-size: .95rem;
+}
+
+/* Row styles */
+tbody tr:nth-child(2n){
+  background: rgba(255,255,255,.01);
+}
+tbody tr:hover{
+  background: rgba(99,102,241,.06);
+}
+
+/* Rounded corners */
+table thead th:first-child { border-top-left-radius: var(--radius); }
+table thead th:last-child  { border-top-right-radius: var(--radius); }
+table tbody tr:last-child td:first-child { border-bottom-left-radius: var(--radius); }
+table tbody tr:last-child td:last-child  { border-bottom-right-radius: var(--radius); }
+
+/* ---------- Actions column fixes ---------- */
+/* 1) Reset tiny forms inside table cells (no big card styling) */
+table td form{
+  width: auto;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* 2) Keep buttons on one line and add spacing */
+td.actions{
+  white-space: nowrap;
+}
+td.actions .actions-wrap{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 3) Compact action buttons */
+td.actions button{
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 999px;
+}
+
+/* Optional: green style for Update button when you add class="update-btn" */
+td.actions .update-btn{
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--success) 92%, #fff 0%),
+    color-mix(in oklab, var(--success) 80%, #000 0%)
+  );
+  border-color: color-mix(in oklab, var(--success) 70%, black 30%);
+}
+
+/* ---------- Utilities ---------- */
+.caption{
+  width: min(100%, 980px);
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px){
+  body > form{
+    grid-template-columns: 1fr;
+  }
+  body > form > button{
+    justify-self: stretch;
+  }
+  table{
+    font-size: .9rem;
+  }
+  td.actions .actions-wrap{
+    gap: 8px;
+  }
+}
