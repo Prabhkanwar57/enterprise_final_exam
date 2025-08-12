@@ -243,7 +243,7 @@ td.actions button{
   border-radius: 999px;
 }
 
-/* Optional: green style for Update button when you add class="update-btn" */
+
 td.actions .update-btn{
   background: linear-gradient(180deg,
     color-mix(in oklab, var(--success) 92%, #fff 0%),
